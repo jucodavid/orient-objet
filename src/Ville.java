@@ -16,15 +16,24 @@ public class Ville {
 		nbreInstancesBis++;
 	}
 	
-	public Ville(String pNom, int pNbre, String pPays) {
+	public Ville(String pNom, int pNbre, String pPays) throws NombreHabitantException, NomVilleException {
+
 		System.out.println("Création d'une ville : " +pNom+ " ...");
 		System.out.println("Paramétrée !");
-		nomVille = pNom;
-		nomPays = pPays;
-		nbreHabitants = pNbre;
-		this.setCatégorie();
-		nbreInstances++;
-		nbreInstancesBis++;
+
+		if(pNbre < 0)
+			throw new NombreHabitantException(pNbre);
+		if(pNom.length() < 3)
+			throw new NomVilleException("Le nom de la ville est invalide ! nom = "+pNom);
+		else {
+			nomVille = pNom;
+			nomPays = pPays;
+			nbreHabitants = pNbre;
+			this.setCatégorie();
+			nbreInstances++;
+			nbreInstancesBis++;
+		}
+
 	}
 	
 	//ACCESSEURS
